@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using akimedia_server.Persistence;
+using AutoMapper;
 
 namespace akimedia_server
 {
@@ -26,6 +27,10 @@ namespace akimedia_server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+
+            services.AddCors();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -54,6 +59,10 @@ namespace akimedia_server
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseCors(builder => {
+                builder.WithOrigins("http://localhost:4200");
+            });
 
             app.UseMvc(routes =>
             {

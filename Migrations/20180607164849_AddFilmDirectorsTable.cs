@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace akimediaserver.Migrations
 {
-    public partial class AddFilmDirector : Migration
+    public partial class AddFilmDirectorsTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace akimediaserver.Migrations
                     Surname = table.Column<string>(maxLength: 50, nullable: false),
                     BornYear = table.Column<int>(nullable: true),
                     DeathYear = table.Column<int>(nullable: true),
-                    County = table.Column<string>(nullable: false)
+                    Country = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -10,8 +10,8 @@ using akimedia_server.Persistence;
 namespace akimediaserver.Migrations
 {
     [DbContext(typeof(AkimediaDbContext))]
-    [Migration("20180606233448_AddFilmDirector")]
-    partial class AddFilmDirector
+    [Migration("20180607164925_SeedFilmDirectors")]
+    partial class SeedFilmDirectors
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace akimediaserver.Migrations
 
                     b.Property<int?>("BornYear");
 
-                    b.Property<string>("County")
+                    b.Property<string>("Country")
                         .IsRequired();
 
                     b.Property<int?>("DeathYear");
