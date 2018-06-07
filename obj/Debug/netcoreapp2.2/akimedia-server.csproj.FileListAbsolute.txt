@@ -1,0 +1,16 @@
+f:\Code\akimedia-server\bin\Debug\netcoreapp2.2\akimedia-server.deps.json
+f:\Code\akimedia-server\bin\Debug\netcoreapp2.2\akimedia-server.runtimeconfig.json
+f:\Code\akimedia-server\bin\Debug\netcoreapp2.2\akimedia-server.runtimeconfig.dev.json
+f:\Code\akimedia-server\bin\Debug\netcoreapp2.2\akimedia-server.dll
+f:\Code\akimedia-server\bin\Debug\netcoreapp2.2\akimedia-server.pdb
+f:\Code\akimedia-server\bin\Debug\netcoreapp2.2\akimedia-server.Views.dll
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.csprojAssemblyReference.cache
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.csproj.CoreCompileInputs.cache
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.RazorAssemblyInfo.cache
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.RazorAssemblyInfo.cs
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.AssemblyInfoInputs.cache
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.AssemblyInfo.cs
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.RazorTargetAssemblyInfo.cache
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.dll
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.pdb
+f:\Code\akimedia-server\obj\Debug\netcoreapp2.2\akimedia-server.csproj.CopyComplete
