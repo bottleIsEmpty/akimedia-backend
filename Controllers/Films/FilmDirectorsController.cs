@@ -21,7 +21,7 @@ namespace akimedia_server.Controllers.Films
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> GetDirectors()
         {
             var directors = await context.FilmDirectors.ToListAsync();
             return Ok(mapper.Map<List<FilmDirector>, List<FilmDirectorResource>>(directors));
@@ -29,7 +29,7 @@ namespace akimedia_server.Controllers.Films
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetDirector(int id)
         {
             var director = await context.FilmDirectors.FindAsync(id);
 
@@ -39,6 +39,33 @@ namespace akimedia_server.Controllers.Films
             var directorResource = mapper.Map<FilmDirector, FilmDirectorResource>(director);
 
             return Ok(directorResource);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDirector([FromBody] FilmDirector director) {
+            return Ok(director);
+        }
+
+        // TODO: PUT 
+        [HttpPut("")]
+        public IActionResult Put()
+        {
+          //TODO: Implement Realistic Implementation
+          return View();
+        }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var director = await context.FilmDirectors.FindAsync(id);
+
+            if (director == null)
+                return BadRequest(); 
+
+            context.FilmDirectors.Remove(director);
+            await context.SaveChangesAsync();           
+
+            return Ok();
         }
     }
 }
