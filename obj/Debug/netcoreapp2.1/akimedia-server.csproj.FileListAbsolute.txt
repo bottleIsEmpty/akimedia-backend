@@ -1,0 +1,14 @@
+F:\Code\akimedia-server\bin\Debug\netcoreapp2.1\akimedia-server.deps.json
+F:\Code\akimedia-server\bin\Debug\netcoreapp2.1\akimedia-server.runtimeconfig.json
+F:\Code\akimedia-server\bin\Debug\netcoreapp2.1\akimedia-server.runtimeconfig.dev.json
+F:\Code\akimedia-server\bin\Debug\netcoreapp2.1\akimedia-server.dll
+F:\Code\akimedia-server\bin\Debug\netcoreapp2.1\akimedia-server.pdb
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.csprojAssemblyReference.cache
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.csproj.CoreCompileInputs.cache
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.RazorAssemblyInfo.cache
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.RazorAssemblyInfo.cs
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.AssemblyInfoInputs.cache
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.AssemblyInfo.cs
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.RazorTargetAssemblyInfo.cache
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.dll
+F:\Code\akimedia-server\obj\Debug\netcoreapp2.1\akimedia-server.pdb
