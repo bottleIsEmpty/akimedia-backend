@@ -4,6 +4,8 @@ using akimedia_server.Controllers.Resources.Films;
 using akimedia_server.Models.Films;
 using akimedia_server.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,9 +16,16 @@ namespace akimedia_server.Controllers.Films
     {
         private readonly AkimediaDbContext context;
         public readonly IMapper mapper;
-        public FilmDirectorsController(AkimediaDbContext context, IMapper mapper)
+        private readonly IHostingEnvironment host;
+
+        public FilmDirectorsController(
+            AkimediaDbContext context, 
+            IMapper mapper, 
+            IHostingEnvironment host
+        )
         {
             this.mapper = mapper;
+            this.host = host;
             this.context = context;
         }
 
@@ -42,19 +51,36 @@ namespace akimedia_server.Controllers.Films
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDirector([FromBody] FilmDirector director) {
-            return Ok(director);
-        }
-
-        // TODO: PUT 
-        [HttpPut("")]
-        public IActionResult Put()
+        public async Task<IActionResult> AddDirector([FromBody] FilmDirectorResource directorResource, IFormFile photo)
         {
-          //TODO: Implement Realistic Implementation
-          return View();
+            var director = mapper.Map<FilmDirectorResource, FilmDirector>(directorResource);
+
+            await context.AddAsync(director);
+            await context.SaveChangesAsync();
+
+            return Ok(mapper.Map<FilmDirector, FilmDirectorResource>(director));
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpPost("{id}/photo")]
+        public async Task<IActionResult> AddPhoto(int id, IFormFile photo)
+        {
+            if (photo == null)
+                return BadRequest();
+
+            var director = await context.FilmDirectors.FindAsync(id);
+
+            if (director == null)
+                return NotFound(id);
+
+            director.Photo = await PhotoLoader.addPhoto("film-director", photo, host.WebRootPath);
+
+            await context.SaveChangesAsync();
+
+            return Ok();
+                
+        }
+
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var director = await context.FilmDirectors.FindAsync(id);

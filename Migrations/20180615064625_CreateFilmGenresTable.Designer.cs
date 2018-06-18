@@ -10,14 +10,14 @@ using akimedia_server.Persistence;
 namespace akimediaserver.Migrations
 {
     [DbContext(typeof(AkimediaDbContext))]
-    [Migration("20180607164925_SeedFilmDirectors")]
-    partial class SeedFilmDirectors
+    [Migration("20180615064625_CreateFilmGenresTable")]
+    partial class CreateFilmGenresTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-preview1-34355")
+                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -45,6 +45,20 @@ namespace akimediaserver.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FilmDirectors");
+                });
+
+            modelBuilder.Entity("akimedia_server.Models.Films.FilmGenre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GenreName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FilmGenres");
                 });
 #pragma warning restore 612, 618
         }

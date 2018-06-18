@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using akimedia_server.Persistence;
 
 namespace akimediaserver.Migrations
 {
     [DbContext(typeof(AkimediaDbContext))]
-    partial class AkimediaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180617155944_AddPhotoToFilmDirector")]
+    partial class AddPhotoToFilmDirector
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,10 +75,6 @@ namespace akimediaserver.Migrations
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<int?>("TotalFilms")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 

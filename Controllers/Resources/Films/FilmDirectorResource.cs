@@ -13,5 +13,7 @@ namespace akimedia_server.Controllers.Resources.Films
         public int? DeathYear { get; set; }
 
         public string Country { get; set; }
+
+        public string Photo { get; set; }
     }
 }

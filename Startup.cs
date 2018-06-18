@@ -38,6 +38,13 @@ namespace akimedia_server
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressConsumesConstraintForFormFileParameters = true;
+                options.SuppressInferBindingSourcesForParameters = true;
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.AddDbContext<AkimediaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -62,6 +69,7 @@ namespace akimedia_server
 
             app.UseCors(builder => {
                 builder.WithOrigins("http://localhost:4200");
+                builder.AllowAnyMethod();
             });
 
             app.UseMvc(routes =>

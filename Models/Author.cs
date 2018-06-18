@@ -23,5 +23,7 @@ namespace akimedia_server.Models
 
         [Required]
         public string Country { get; set; }
+
+        public string Photo { get; set; }
     }
 }
