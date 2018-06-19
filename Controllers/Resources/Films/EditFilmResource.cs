@@ -13,7 +13,7 @@ namespace akimedia_server.Controllers.Resources.Films
         [MaxLength(500)]
         public string Title { get; set; }
 
-        public int DirectorId { get; set; }
+        public int Director { get; set; }
 
         public int Year { get; set; }
 

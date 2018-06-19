@@ -15,5 +15,7 @@ namespace akimedia_server.Controllers.Resources.Films
         public string Country { get; set; }
 
         public string Photo { get; set; }
+
+        public int TotalFilms { get; set; }
     }
 }

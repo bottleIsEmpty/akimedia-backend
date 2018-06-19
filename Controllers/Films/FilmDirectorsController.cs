@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace akimedia_server.Controllers.Films
 {
+    [ApiController]
     [Route("/api/films/directors")]
-    public class FilmDirectorsController : Controller
+    public class FilmDirectorsController : ControllerBase
     {
         private readonly AkimediaDbContext context;
         public readonly IMapper mapper;
@@ -30,15 +33,22 @@ namespace akimedia_server.Controllers.Films
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDirectors()
+        [Authorize]
+        public async Task<IActionResult> GetDirectors(string query)
         {
-            var directors = await context.FilmDirectors.ToListAsync();
+            var dbQuery = context.FilmDirectors.AsQueryable();
+            if (query != null)
+            {
+                dbQuery = dbQuery.Where(d => d.Name.Contains(query) || d.Surname.Contains(query));
+            }
+                
+            var directors = await dbQuery.ToListAsync();
+            
             return Ok(mapper.Map<List<FilmDirector>, List<FilmDirectorResource>>(directors));
-        
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDirector(int id)
+        public async Task<IActionResult> GetDirector(int? id)
         {
             var director = await context.FilmDirectors.FindAsync(id);
 
@@ -86,12 +96,12 @@ namespace akimedia_server.Controllers.Films
             var director = await context.FilmDirectors.FindAsync(id);
 
             if (director == null)
-                return BadRequest(); 
+                return NotFound();
 
-            context.FilmDirectors.Remove(director);
+            context.Remove(director);
             await context.SaveChangesAsync();           
 
-            return Ok();
+            return Ok(id);
         }
     }
 }

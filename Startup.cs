@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using akimedia_server.Persistence;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace akimedia_server
 {
@@ -45,6 +46,17 @@ namespace akimedia_server
                 options.SuppressModelStateInvalidFilter = true;
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://akimedia.auth0.com/";
+                options.Audience = "https://api.akimedia.com";
+            });
+
             services.AddDbContext<AkimediaDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -71,6 +83,8 @@ namespace akimedia_server
                 builder.WithOrigins("http://localhost:4200");
                 builder.AllowAnyMethod();
             });
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

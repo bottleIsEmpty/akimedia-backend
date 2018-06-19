@@ -8,6 +8,8 @@ using akimedia_server.Controllers.Resources.Films;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 
 namespace akimedia_server.Controllers.Films
 {
@@ -18,9 +20,12 @@ namespace akimedia_server.Controllers.Films
         private readonly AkimediaDbContext context;
         private readonly IMapper mapper;
         private readonly ILogger logger;
-        public FilmsController(AkimediaDbContext context, IMapper mapper, ILogger<FilmsController> logger)
+        private readonly IHostingEnvironment host;
+
+        public FilmsController(AkimediaDbContext context, IMapper mapper, ILogger<FilmsController> logger, IHostingEnvironment host)
         {
             this.logger = logger;
+            this.host = host;
             this.mapper = mapper;
             this.context = context;
         }
@@ -63,13 +68,32 @@ namespace akimedia_server.Controllers.Films
             if (!ModelState.IsValid)
                 return BadRequest(filmResource);
 
-            var director = await context.FilmDirectors.FindAsync(filmResource.DirectorId);
+            var director = await context.FilmDirectors.FindAsync(filmResource.Director);
             director.TotalFilms++;
 
             await context.Films.AddAsync(film);
             await context.SaveChangesAsync();
 
             return Ok(mapper.Map<Film, EditFilmResource>(film));
+        }
+
+        [HttpPost("{id}/photo")]
+        public async Task<IActionResult> AddPhoto(int id, IFormFile photo)
+        {
+            if (photo == null)
+                return BadRequest();
+
+            var film = await context.Films.FindAsync(id);
+
+            if (film == null)
+                return NotFound(id);
+
+            film.Logo = await PhotoLoader.addPhoto("film", photo, host.WebRootPath);
+
+            await context.SaveChangesAsync();
+
+            return Ok();
+                
         }
 
     }
